@@ -17,11 +17,7 @@ export default function Navbar() {
 
         {/* LOGO */}
         <Link to="/" className="flex items-center gap-3">
-          <img
-            src="/logo.png"
-            alt="Tandicia"
-            className="w-9 h-9 object-contain"
-          />
+          <img src="/logo.png" className="w-9 h-9 object-contain" />
           <span className="text-lg md:text-xl font-semibold tracking-tight">
             Tandicia
           </span>
@@ -29,21 +25,14 @@ export default function Navbar() {
 
         {/* LINKS */}
         <div className="hidden md:flex items-center gap-10 text-[15px] font-medium">
-          <Link to="/" className={linkStyle("/")}>
-            Home
-          </Link>
-          <a href="/#about" className="text-gray-600 hover:text-black transition">
-            Company
-          </a>
-          <Link to="/faq" className={linkStyle("/faq")}>
-            FAQ
-          </Link>
-          <a href="/#contact" className="text-gray-600 hover:text-black transition">
-            Contact
-          </a>
+          <Link to="/" className={linkStyle("/")}>Home</Link>
+          <Link to="/about" className={linkStyle("/about")}>Company</Link>
+          <Link to="/gallery" className={linkStyle("/gallery")}>Gallery</Link>
+          <Link to="/faq" className={linkStyle("/faq")}>FAQ</Link>
+          <Link to="/contact" className={linkStyle("/contact")}>Contact</Link>
         </div>
 
-        {/* CTA BUTTON */}
+        {/* CTA */}
         <Link
           to="/donate"
           className="bg-green-800 text-white px-6 py-2.5 rounded-full text-sm font-medium 

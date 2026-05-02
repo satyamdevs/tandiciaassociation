@@ -3,40 +3,34 @@ import Hero from "../components/Hero";
 import Problem from "../components/Problem";
 import Process from "../components/Process";
 import Stats from "../components/Stats";
-import Gallery from "../components/Gallery";
+import FeaturedStories from "../components/FeaturedStories";
 
 export default function Home() {
   return (
     <div className="bg-white text-gray-900">
-
-      {/* Navbar */}
       <Navbar />
 
-      {/* Hero */}
-      <section className="pt-10">
-        <Hero />
-      </section>
+      <main>
+        <section className="pt-6">
+          <Hero />
+        </section>
 
-      {/* Problem */}
-      <section className="bg-white">
-        <Problem />
-      </section>
+        <section className="pt-8">
+          <Problem />
+        </section>
 
-      {/* Process */}
-      <section className="bg-gray-50">
-        <Process />
-      </section>
+        <section className="pt-12 bg-gray-50">
+          <Process />
+        </section>
 
-      {/* Stats */}
-      <section className="bg-white">
-        <Stats />
-      </section>
+        <section className="bg-gray-900">
+          <Stats />
+        </section>
 
-      {/* Gallery */}
-      <section className="bg-gray-50">
-        <Gallery />
-      </section>
-
+        <section className="pt-12">
+          <FeaturedStories />
+        </section>
+      </main>
     </div>
   );
 }

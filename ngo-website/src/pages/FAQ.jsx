@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 
 const faqs = [
   {
     q: "What kind of communities do you serve?",
-    a: "We work with rural villages, slum areas, low-income neighborhoods, and regions where people don’t have easy access to proper eye-care facilities. If vision support is needed — we go there.",
+    a: "We work with rural villages, slum areas, low-income neighborhoods, and regions where people don't have easy access to proper eye-care facilities. If vision support is needed — we go there.",
   },
   {
     q: "How is your eye camp different from regular check-up clinics?",
@@ -32,53 +33,86 @@ const faqs = [
   },
 ];
 
+function FaqItem({ item, index, isOpen, onClick, isInView }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.4, delay: index * 0.05 }}
+      className={`border-b border-gray-200 last:border-0 ${isOpen ? "bg-gray-50 rounded-2xl p-6 mb-2" : ""}`}
+    >
+      <button
+        onClick={onClick}
+        className="w-full flex justify-between items-center py-6 text-left"
+      >
+        <h3 className="text-lg md:text-xl font-medium pr-8">{item.q}</h3>
+        <span className={`text-2xl text-green-700 transition-transform ${isOpen ? "rotate-45" : ""}`}>
+          +
+        </span>
+      </button>
+      {isOpen && (
+        <motion.p
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          exit={{ opacity: 0, height: 0 }}
+          className="text-gray-500 leading-relaxed pb-4"
+        >
+          {item.a}
+        </motion.p>
+      )}
+    </motion.div>
+  );
+}
+
 export default function FAQ() {
   const [open, setOpen] = useState(null);
+  const heroRef = useRef(null);
+  const heroInView = useInView(heroRef, { once: true });
 
   return (
     <div className="bg-white text-gray-900 min-h-screen">
-
       <Navbar />
 
-      <div className="max-w-4xl mx-auto px-6 py-20">
+      <section ref={heroRef} className="relative px-6 md:px-12 py-20 md:py-28 overflow-hidden">
+        <div className="absolute top-20 right-0 w-96 h-96 bg-green-100 rounded-full blur-3xl opacity-50" />
 
-        {/* Heading */}
-        <h1 className="text-4xl md:text-5xl font-serif mb-12">
-          Got questions?
-          <br />
-          <span className="text-gray-400">
-            We’ve got answers.
-          </span>
-        </h1>
+        <div className="relative max-w-4xl mx-auto">
+          <motion.span
+            initial={{ opacity: 0, x: -20 }}
+            animate={heroInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="inline-block text-sm text-green-800 font-medium mb-4"
+          >
+            FAQ
+          </motion.span>
 
-        {/* FAQ List */}
-        <div className="space-y-4">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={heroInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-5xl md:text-7xl font-serif leading-tight mb-6"
+          >
+            Got questions?
+            <br />
+            <span className="text-gray-400">We've got answers.</span>
+          </motion.h1>
+        </div>
+      </section>
+
+      <section className="px-6 md:px-12 pb-20 md:pb-28">
+        <div className="max-w-4xl mx-auto bg-white rounded-3xl p-6 md:p-8">
           {faqs.map((item, i) => (
-            <div
+            <FaqItem
               key={i}
-              className="border border-gray-200 rounded-xl p-5 cursor-pointer hover:shadow-sm transition"
+              item={item}
+              index={i}
+              isOpen={open === i}
               onClick={() => setOpen(open === i ? null : i)}
-            >
-              <div className="flex justify-between items-center">
-                <h3 className="text-lg font-medium">
-                  {item.q}
-                </h3>
-                <span className="text-xl">
-                  {open === i ? "−" : "+"}
-                </span>
-              </div>
-
-              {open === i && (
-                <p className="mt-4 text-gray-500 leading-relaxed">
-                  {item.a}
-                </p>
-              )}
-            </div>
+              isInView={heroInView}
+            />
           ))}
         </div>
-
-      </div>
-
+      </section>
     </div>
   );
 }
