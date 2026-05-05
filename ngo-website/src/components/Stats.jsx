@@ -89,9 +89,9 @@ export default function Stats() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-10 md:mb-12"
         >
-          <h2 className="text-3xl md:text-5xl font-serif leading-tight text-white">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif leading-tight text-white">
             Support that helps people see
             <br />
             the world the way they were meant to.

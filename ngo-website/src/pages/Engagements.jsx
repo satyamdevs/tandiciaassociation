@@ -42,17 +42,17 @@ export default function Engagements() {
     <div className="bg-white text-gray-900 min-h-screen">
       <Navbar />
 
-      <section ref={heroRef} className="relative px-6 md:px-12 py-20 md:py-32 overflow-hidden">
-        <div className="absolute -top-20 -right-20 w-[500px] h-[500px] bg-green-50 rounded-full blur-3xl opacity-60" />
-        <div className="absolute -bottom-32 -left-32 w-[400px] h-[400px] bg-emerald-50 rounded-full blur-3xl opacity-50" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-green-50/40 to-transparent rounded-full blur-3xl" />
+      <section ref={heroRef} className="relative px-6 md:px-12 py-16 md:py-20 md:py-32 overflow-hidden">
+        <div className="absolute -top-20 -right-20 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-green-50 rounded-full blur-3xl opacity-60" />
+        <div className="absolute -bottom-32 -left-32 w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-emerald-50 rounded-full blur-3xl opacity-50" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[600px] md:h-[600px] bg-gradient-to-br from-green-50/40 to-transparent rounded-full blur-3xl" />
 
         <div className="relative max-w-6xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-green-50 text-green-800 px-5 py-2 rounded-full text-sm font-medium mb-8"
+            className="inline-flex items-center gap-2 bg-green-50 text-green-800 px-4 md:px-5 py-2 rounded-full text-sm font-medium mb-6 md:mb-8"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -65,7 +65,7 @@ export default function Engagements() {
             initial={{ opacity: 0, y: 30 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-serif leading-tight mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif leading-tight mb-4 md:mb-6"
           >
             Our Camps,
             <br />
@@ -76,14 +76,14 @@ export default function Engagements() {
             initial={{ opacity: 0, y: 20 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl text-gray-400 max-w-2xl mx-auto"
+            className="text-base md:text-xl text-gray-400 max-w-2xl mx-auto"
           >
             Explore our eye care engagements across different communities. Click a camp to see all moments.
           </motion.p>
         </div>
       </section>
 
-      <section className="px-6 md:px-12 py-16 md:py-24">
+      <section className="px-6 md:px-12 py-12 md:py-16 md:py-24">
         <div className="max-w-5xl mx-auto">
           {loading ? (
             <div className="space-y-4">

@@ -46,16 +46,16 @@ export default function FeaturedStories() {
   );
 
   return (
-    <section className="px-6 md:px-12 py-16 md:py-24">
+    <section className="px-6 md:px-12 py-12 md:py-16 md:py-24">
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="mb-10 md:mb-14"
+          className="mb-8 md:mb-10 md:mb-14"
         >
-          <h2 className="text-3xl md:text-5xl font-serif leading-tight max-w-3xl">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif leading-tight max-w-3xl">
             Covered by community newspapers
             <br />
             or our impact in eye-care
@@ -96,8 +96,8 @@ export default function FeaturedStories() {
                     </p>
                   </div>
 
-                  <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <p className="text-white/95 font-medium text-sm leading-snug">
+                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
+                    <p className="text-white/95 font-medium text-xs sm:text-sm leading-snug line-clamp-4">
                       {item.text}
                     </p>
                   </div>

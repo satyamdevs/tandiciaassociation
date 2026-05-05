@@ -19,7 +19,7 @@ export default function Problem() {
   return (
     <section id="about" className="px-6 md:px-12 max-w-7xl mx-auto">
       <div className="py-12 md:py-20">
-        <h2 className="text-4xl md:text-5xl font-serif mb-12 md:mb-16">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif mb-10 md:mb-12 md:mb-16">
           Too many eye problems,
           <br />
           <span className="text-gray-400 italic">
@@ -27,7 +27,7 @@ export default function Problem() {
           </span>
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-8 md:gap-10 mb-12 md:mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 md:gap-10 mb-10 md:mb-12 md:mb-16">
           {data.map((item, i) => (
             <motion.div
               key={i}
@@ -37,13 +37,13 @@ export default function Problem() {
               viewport={{ once: true }}
               className="pt-2"
             >
-              <h3 className="text-xl font-serif mb-3">
+              <h3 className="text-lg sm:text-xl font-serif mb-3">
                 {item.title}
               </h3>
 
               <div className="w-10 h-[2px] bg-black mb-4"></div>
 
-              <p className="text-gray-500 leading-relaxed">
+              <p className="text-gray-500 leading-relaxed text-sm sm:text-base">
                 {item.desc}
               </p>
             </motion.div>
@@ -60,7 +60,7 @@ export default function Problem() {
           <img
             src="/image-copy.png"
             alt="Eye camp"
-            className="w-full h-[350px] md:h-[450px] object-cover"
+            className="w-full h-[250px] sm:h-[350px] md:h-[450px] object-cover"
           />
         </motion.div>
       </div>
