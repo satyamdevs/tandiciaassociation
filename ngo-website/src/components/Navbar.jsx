@@ -28,6 +28,7 @@ export default function Navbar() {
           <Link to="/" className={linkStyle("/")}>Home</Link>
           <Link to="/about" className={linkStyle("/about")}>Company</Link>
           <Link to="/engagements" className={linkStyle("/engagements")}>Engagements</Link>
+          <Link to="/associations" className={linkStyle("/associations")}>Associations</Link>
           <Link to="/faq" className={linkStyle("/faq")}>FAQ</Link>
           <Link to="/contact" className={linkStyle("/contact")}>Contact</Link>
         </div>

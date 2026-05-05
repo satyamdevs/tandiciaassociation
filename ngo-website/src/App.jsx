@@ -7,6 +7,7 @@ import Donate from "./pages/Donate";
 import Contact from "./pages/Contact";
 import Engagements from "./pages/Engagements";
 import CampDetail from "./pages/CampDetail";
+import Associations from "./pages/Associations";
 import Admin from "./pages/Admin";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/engagements" element={<Engagements />} />
         <Route path="/engagements/:campName" element={<CampDetail />} />
+        <Route path="/associations" element={<Associations />} />
         <Route path="/admin" element={<Admin />} />
       </Routes>
     </BrowserRouter>
