@@ -5,7 +5,8 @@ import About from "./pages/About";
 import FAQ from "./pages/FAQ";
 import Donate from "./pages/Donate";
 import Contact from "./pages/Contact";
-import Gallery from "./pages/Gallery";
+import Engagements from "./pages/Engagements";
+import CampDetail from "./pages/CampDetail";
 import Admin from "./pages/Admin";
 
 function App() {
@@ -17,7 +18,8 @@ function App() {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/donate" element={<Donate />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/engagements" element={<Engagements />} />
+        <Route path="/engagements/:campName" element={<CampDetail />} />
         <Route path="/admin" element={<Admin />} />
       </Routes>
     </BrowserRouter>
