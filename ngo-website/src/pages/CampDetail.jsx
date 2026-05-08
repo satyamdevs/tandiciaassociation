@@ -3,6 +3,7 @@ import { useRef, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function CampDetail() {
   const { campName } = useParams();
@@ -145,8 +146,9 @@ export default function CampDetail() {
               </div>
             </>
           )}
-        </div>
-      </section>
+      </div>
+        </section>
+      <Footer />
     </div>
   );
 }

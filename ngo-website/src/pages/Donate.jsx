@@ -2,6 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function Donate() {
   const heroRef = useRef(null);
@@ -134,6 +135,7 @@ export default function Donate() {
           </motion.div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

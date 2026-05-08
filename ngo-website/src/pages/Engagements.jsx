@@ -3,12 +3,15 @@ import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function Engagements() {
   const heroRef = useRef(null);
   const heroInView = useInView(heroRef, { once: true });
   const [images, setImages] = useState([]);
+  const [upcomingCamps, setUpcomingCamps] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [upcomingLoading, setUpcomingLoading] = useState(true);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -26,7 +29,25 @@ export default function Engagements() {
       }
     };
 
+    const fetchUpcomingCamps = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("upcoming_camps")
+          .select("*")
+          .gte("camp_date", new Date().toISOString().split("T")[0])
+          .order("camp_date", { ascending: true });
+
+        if (error) throw error;
+        setUpcomingCamps(data || []);
+      } catch (error) {
+        console.error("Error fetching upcoming camps:", error);
+      } finally {
+        setUpcomingLoading(false);
+      }
+    };
+
     fetchImages();
+    fetchUpcomingCamps();
   }, []);
 
   const camps = images.reduce((acc, img) => {
@@ -83,8 +104,173 @@ export default function Engagements() {
         </div>
       </section>
 
+      {/* Upcoming Camps Section */}
+      <section className="px-6 md:px-12 py-12 md:py-16 bg-green-50">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={heroInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="mb-10"
+          >
+            <span className="inline-block bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
+              Coming Soon
+            </span>
+            <h2 className="text-3xl md:text-5xl font-serif text-gray-900 mb-4">
+              Upcoming Camps
+            </h2>
+            <p className="text-gray-500 text-lg">
+              Join us at our next eye care camp. Mark your calendar!
+            </p>
+          </motion.div>
+
+          {upcomingLoading ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="bg-white rounded-2xl p-6 animate-pulse">
+                  <div className="w-12 h-12 bg-gray-200 rounded-xl mb-4" />
+                  <div className="h-6 bg-gray-200 rounded w-3/4 mb-3" />
+                  <div className="h-4 bg-gray-200 rounded w-1/2 mb-2" />
+                  <div className="h-4 bg-gray-200 rounded w-2/3" />
+                </div>
+              ))}
+            </div>
+          ) : upcomingCamps.length === 0 ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="text-center py-16 bg-white rounded-3xl border border-green-100"
+            >
+              <div className="w-20 h-20 mx-auto mb-6 bg-green-100 rounded-2xl flex items-center justify-center">
+                <svg className="w-10 h-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <p className="text-gray-400 text-lg mb-2">No upcoming camps scheduled</p>
+              <p className="text-gray-300 text-sm">Check back later for updates</p>
+            </motion.div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {upcomingCamps.map((camp, idx) => (
+                <motion.div
+                  key={camp.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: idx * 0.1 }}
+                  className="bg-white rounded-2xl overflow-hidden border border-green-100 hover:shadow-lg hover:border-green-200 transition-all group"
+                >
+                  {camp.banner_url && (
+                    <div className="h-48 overflow-hidden">
+                      <img
+                        src={camp.banner_url}
+                        alt={camp.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                    </div>
+                  )}
+
+                  <div className="p-6">
+                    <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-green-200 transition-colors">
+                      <svg className="w-6 h-6 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+
+                    <h3 className="text-xl font-serif text-gray-900 mb-2">{camp.name}</h3>
+
+                  <div className="space-y-2 mb-4">
+                    <div className="flex items-center gap-2 text-gray-500 text-sm">
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      <span>
+                        {new Date(camp.camp_date).toLocaleDateString("en-US", {
+                          weekday: "long",
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </span>
+                    </div>
+
+                    {camp.location && (
+                      <div className="flex items-center gap-2 text-gray-500 text-sm">
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span>{camp.location}</span>
+                      </div>
+                    )}
+
+                    {camp.time && (
+                      <div className="flex items-center gap-2 text-gray-500 text-sm">
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>{camp.time}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {camp.description && (
+                    <p className="text-gray-500 text-sm mb-4 line-clamp-2">{camp.description}</p>
+                  )}
+
+                  <div className="pt-4 border-t border-gray-100">
+                    <span className="inline-flex items-center gap-1 text-green-700 text-sm font-medium group-hover:gap-2 transition-all">
+                      Learn more
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </span>
+                  </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
+
+          {!upcomingLoading && upcomingCamps.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="mt-8 text-center"
+            >
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 bg-green-800 text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-green-700 transition-all shadow-sm hover:shadow-md"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                Schedule a Camp
+              </Link>
+            </motion.div>
+          )}
+        </div>
+      </section>
+
+      {/* Past Camps Section */}
       <section className="px-6 md:px-12 py-12 md:py-16 md:py-24">
         <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={heroInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="mb-10"
+          >
+            <span className="inline-block bg-gray-100 text-gray-600 px-4 py-2 rounded-full text-sm font-medium mb-4">
+              Past Events
+            </span>
+            <h2 className="text-3xl md:text-5xl font-serif text-gray-900 mb-4">
+              Past Camps
+            </h2>
+            <p className="text-gray-500 text-lg">
+              Explore our previous eye care engagements and moments captured.
+            </p>
+          </motion.div>
           {loading ? (
             <div className="space-y-4">
               {[1, 2, 3].map((i) => (
@@ -187,6 +373,7 @@ export default function Engagements() {
           )}
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

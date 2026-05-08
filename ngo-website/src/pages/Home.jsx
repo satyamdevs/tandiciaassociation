@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import Hero from "../components/Hero";
 import Problem from "../components/Problem";
 import Process from "../components/Process";
@@ -31,6 +32,7 @@ export default function Home() {
           <FeaturedStories />
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

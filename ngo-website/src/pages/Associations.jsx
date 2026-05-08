@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { supabase } from "../lib/supabase";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function Associations() {
   const [associations, setAssociations] = useState([]);
@@ -29,6 +31,7 @@ export default function Associations() {
 
   return (
     <div className="bg-white text-gray-900">
+      <Navbar />
       {/* Hero Section */}
       <section className="px-6 md:px-12 py-16 md:py-24 max-w-6xl mx-auto">
         <motion.div
@@ -133,6 +136,7 @@ export default function Associations() {
           </div>
         )}
       </section>
+      <Footer />
     </div>
   );
 }

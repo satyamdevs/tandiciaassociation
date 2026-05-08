@@ -2,6 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function Contact() {
   const heroRef = useRef(null);
@@ -167,6 +168,7 @@ export default function Contact() {
           </motion.div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

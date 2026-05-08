@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const faqs = [
   {
@@ -113,6 +114,7 @@ export default function FAQ() {
           ))}
         </div>
       </section>
+      <Footer />
     </div>
   );
 }
