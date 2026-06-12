@@ -90,57 +90,14 @@ export default function Contact() {
                 Speak directly with our team.
               </p>
               <a
-                href="tel:+919813236669"
+                href="tel:+919811326669"
                 className="text-green-700 font-medium hover:underline"
               >
-                +91 98132 36669
+                +91 98113 26669
               </a>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="group bg-gray-50 rounded-3xl p-8 md:p-10 hover:shadow-xl transition-all"
-            >
-              <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-6">
-                <svg className="w-6 h-6 text-green-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-serif mb-3">Visit us</h3>
-              <p className="text-gray-500 mb-6">
-                Come meet the team behind our mission.
-              </p>
-              <p className="text-green-700 font-medium">
-                Mewla Maharajpur, Gurugram
-                <br />
-                Haryana, India
-              </p>
-            </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="group bg-gray-50 rounded-3xl p-8 md:p-10 hover:shadow-xl transition-all"
-            >
-              <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-6">
-                <svg className="w-6 h-6 text-green-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-serif mb-3">Working Hours</h3>
-              <p className="text-gray-500 mb-6">
-                When you can reach us.
-              </p>
-              <p className="text-green-700 font-medium">
-                Mon – Sat: 9:00 AM – 6:00 PM
-                <br />
-                Sunday: Closed
-              </p>
-            </motion.div>
           </div>
         </div>
       </section>

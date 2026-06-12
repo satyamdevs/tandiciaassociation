@@ -83,6 +83,13 @@ function ImpactCard({ stat, index, isInView }) {
   );
 }
 
+function teamImageSrc(index) {
+  if (index === 0) return "/team/image.png";
+  if (index === 1) return "/team/image copy.png";
+  if (index <= 26) return `/team/image copy ${index}.png`;
+  return `/team/_missing_${index}.png`;
+}
+
 function TeamCard({ name, index, isInView }) {
   return (
     <motion.div
@@ -94,7 +101,7 @@ function TeamCard({ name, index, isInView }) {
     >
       <div className="relative w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 mx-auto mb-3 rounded-2xl overflow-hidden shadow-md group-hover:shadow-xl transition-shadow">
         <img
-          src={`/team/${index + 1}.jpg`}
+          src={teamImageSrc(index)}
           alt={name}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
           onError={(e) => {
@@ -233,7 +240,7 @@ export default function About() {
 
       <section className="px-6 md:px-12 pb-12 md:pb-20">
         <div className="max-w-6xl mx-auto">
-          <SectionImage src="/about/approach.jpg" alt="Our approach" index={1} isInView={approachInView} />
+          <SectionImage src="/team/our approach.png" alt="Our approach" index={1} isInView={approachInView} />
         </div>
       </section>
 
@@ -260,7 +267,7 @@ export default function About() {
 
       <section className="px-6 md:px-12 pb-12 md:pb-20">
         <div className="max-w-6xl mx-auto">
-          <SectionImage src="/team/impact.png" alt="Our impact" index={2} isInView={statsInView} />
+          <SectionImage src="/team/imapct.png" alt="Our impact" index={2} isInView={statsInView} />
         </div>
       </section>
 

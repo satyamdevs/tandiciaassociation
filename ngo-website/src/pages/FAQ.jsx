@@ -40,14 +40,16 @@ function FaqItem({ item, index, isOpen, onClick, isInView }) {
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      className={`border-b border-gray-200 last:border-0 ${isOpen ? "bg-gray-50 rounded-2xl p-6 mb-2" : ""}`}
+      className={`overflow-hidden ${isOpen ? "bg-gray-50 rounded-xl" : ""}`}
     >
       <button
         onClick={onClick}
-        className="w-full flex justify-between items-center py-6 text-left"
+        className={`w-full flex justify-between items-center text-left px-5 transition-colors ${
+          isOpen ? "pt-5 pb-2" : "py-4"
+        }`}
       >
-        <h3 className="text-lg md:text-xl font-medium pr-8">{item.q}</h3>
-        <span className={`text-2xl text-green-700 transition-transform ${isOpen ? "rotate-45" : ""}`}>
+        <h3 className="text-base md:text-lg font-medium pr-4 text-gray-900">{item.q}</h3>
+        <span className={`text-xl text-green-700 shrink-0 transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>
           +
         </span>
       </button>
@@ -56,11 +58,12 @@ function FaqItem({ item, index, isOpen, onClick, isInView }) {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
-          className="text-gray-500 leading-relaxed pb-4"
+          className="text-gray-500 text-sm leading-relaxed px-5 pb-5"
         >
           {item.a}
         </motion.p>
       )}
+      <hr className={`border-gray-100 transition-opacity ${isOpen ? "opacity-0" : ""}`} />
     </motion.div>
   );
 }
@@ -74,10 +77,10 @@ export default function FAQ() {
     <div className="bg-white text-gray-900 min-h-screen">
       <Navbar />
 
-      <section ref={heroRef} className="relative px-6 md:px-12 py-20 md:py-28 overflow-hidden">
+      <section ref={heroRef} className="relative px-6 md:px-12 pt-16 md:pt-24 pb-12 md:pb-20 overflow-hidden">
         <div className="absolute top-20 right-0 w-96 h-96 bg-green-100 rounded-full blur-3xl opacity-50" />
 
-        <div className="relative max-w-4xl mx-auto">
+        <div className="relative max-w-6xl mx-auto">
           <motion.span
             initial={{ opacity: 0, x: -20 }}
             animate={heroInView ? { opacity: 1, x: 0 } : {}}
@@ -100,8 +103,8 @@ export default function FAQ() {
         </div>
       </section>
 
-      <section className="px-6 md:px-12 pb-20 md:pb-28">
-        <div className="max-w-4xl mx-auto bg-white rounded-3xl p-6 md:p-8">
+      <section className="px-6 md:px-12 pb-12 md:pb-20">
+        <div className="max-w-6xl mx-auto">
           {faqs.map((item, i) => (
             <FaqItem
               key={i}
